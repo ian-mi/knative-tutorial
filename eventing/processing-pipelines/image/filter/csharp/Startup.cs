@@ -54,7 +54,9 @@ namespace Filter
             {
                 endpoints.MapPost("/", async context =>
                 {
+                    logger.LogInformation("Reading event");
                     var cloudEvent = await eventReader.Read(context);
+                    logger.LogInformation("Getting Bucket");
                     var (bucket, name) = bucketEventDataReader.Read(cloudEvent);
 
                     // This is only needed in Cloud Run (Managed) when the
